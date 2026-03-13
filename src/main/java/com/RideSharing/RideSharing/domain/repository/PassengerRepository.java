@@ -3,6 +3,7 @@ package com.ridesharing.domain.repository;
 import com.ridesharing.domain.entity.Passenger;
 
 import java.util.Optional;
+import java.util.List;
 import java.util.UUID;
 
 public interface PassengerRepository {
@@ -10,4 +11,5 @@ public interface PassengerRepository {
     Optional<Passenger> findByEmail(String email);
     Passenger save(Passenger passenger);
     void update(Passenger passenger);
+    List<Passenger> findAll();
 }

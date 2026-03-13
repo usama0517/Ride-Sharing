@@ -5,8 +5,7 @@ import com.ridesharing.domain.repository.PassengerRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.Map;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Repository
@@ -34,5 +33,10 @@ public class InMemoryPassengerRepository implements PassengerRepository {
     @Override
     public void update(Passenger passenger) {
         passengers.put(passenger.getId(), passenger);
+    }
+
+    @Override
+    public List<Passenger> findAll() {  // ADD THIS METHOD
+        return new ArrayList<>(passengers.values());
     }
 }

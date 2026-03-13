@@ -26,7 +26,7 @@ public class RidesController {
     private final GetRideHistoryHandler getRideHistoryHandler;
     private final GetAvailableDriversHandler getAvailableDriversHandler;
     private final GetDriverEarningsHandler getDriverEarningsHandler;
-
+    private final StartRideHandler startRideHandler;
     // ============= COMMAND ENDPOINTS (Write Operations) =============
 
     @PostMapping("/request")
@@ -118,5 +118,14 @@ public class RidesController {
         GetDriverEarningsQuery query = new GetDriverEarningsQuery(driverId, startDate, endDate);
         DriverEarningsDto earnings = getDriverEarningsHandler.handle(query);
         return ResponseEntity.ok(earnings);
+    }
+
+    @PutMapping("/{rideId}/start")
+    public ResponseEntity<StartRideResponse> startRide(
+            @PathVariable UUID rideId,
+            @RequestBody StartRideCommand command) {
+        command.setRideId(rideId);
+        StartRideResponse response = startRideHandler.handle(command);
+        return ResponseEntity.ok(response);
     }
 }
